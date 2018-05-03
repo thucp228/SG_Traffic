@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SG Traffic</string>
+    <string name="nav_alert">Cảnh báo</string>
+    <string name="nav_car">Đi nhờ</string>
+    <string name="nav_map">Bản đồ</string>
+    <string name="nav_setting">Cài đặt</string>
+    <string name="search_map_km_unit">km</string>
+    <string name="search_map_1.5km">1.5</string>
+    <string name="search_map_3km">3</string>
+    <string name="search_map_5km">5</string>
+    <string name="search_map_10km">10</string>
+    <string name="search_map_30km">30</string>
+    <string name="search_map_allkm">Tất cả</string>
+</resources>
