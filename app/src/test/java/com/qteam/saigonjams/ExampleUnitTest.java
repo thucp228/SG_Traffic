@@ -1,4 +1,4 @@
-package com.qteam.sgtraffic;
+package com.qteam.saigonjams;
 
 import org.junit.Test;
 

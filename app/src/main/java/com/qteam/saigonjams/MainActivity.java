@@ -1,4 +1,4 @@
-package com.qteam.sgtraffic;
+package com.qteam.saigonjams;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mainNav = findViewById(R.id.main_nav);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.hide();
         disableShiftMode(mainNav);
 
         mainFrame = findViewById(R.id.main_frame);

@@ -1,4 +1,4 @@
-package com.qteam.sgtraffic;
+package com.qteam.saigonjams;
 
 
 import android.os.Bundle;
@@ -8,15 +8,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -55,8 +54,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getContext());
         googleMap = ggMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(10.870277, 106.803736)).title("Trường ĐH CNTT").snippet("Chào mừng bạn đến với trường ĐH CNTT"));
-        CameraPosition myMarker = CameraPosition.builder().target(new LatLng(10.870277, 106.803736)).zoom(16).bearing(0).tilt(45).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(myMarker));
+        showDefaultLocation();
+    }
+
+    private void showDefaultLocation() {
+        Toast.makeText(getActivity(), "Hiển thị vị trí mặc định", Toast.LENGTH_SHORT).show();
+        LatLng defaultLocation = new LatLng(10.849029, 106.774181);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
     }
 }

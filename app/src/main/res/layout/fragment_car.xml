@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CarFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hiển thị các thông báo cho đi nhờ xe"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textSize="20dp"/>
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_2"
         android:layout_width="wrap_content"
@@ -23,6 +15,6 @@
         android:layout_marginRight="15dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@android:color/holo_orange_dark"
+        app:backgroundTint="@color/colorPrimary"
         app:fabSize="normal" />
 </FrameLayout>

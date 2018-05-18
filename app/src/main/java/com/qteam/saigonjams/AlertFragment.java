@@ -1,4 +1,4 @@
-package com.qteam.sgtraffic;
+package com.qteam.saigonjams;
 
 
 import android.os.Bundle;
@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CarFragment extends Fragment {
+public class AlertFragment extends Fragment {
 
 
-    public CarFragment() {
+    public AlertFragment() {
         // Required empty public constructor
     }
 
@@ -19,7 +19,7 @@ public class CarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_car, container, false);
+        return inflater.inflate(R.layout.fragment_alert, container, false);
     }
 
 }

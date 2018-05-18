@@ -1,4 +1,4 @@
-package com.qteam.sgtraffic;
+package com.qteam.saigonjams;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
