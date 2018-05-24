@@ -8,8 +8,12 @@
     android:paddingRight="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/colorWhite">
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@color/colorWhite"
+    android:elevation="2dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -21,8 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_user"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="5dp" />
         <TextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
@@ -41,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_phone"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvPhone"
@@ -61,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_user_location"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvStartPos"
@@ -81,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_marker"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvEndPos"
@@ -101,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_vehicle"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvVehicleType"

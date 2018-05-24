@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertFragment alertFragment;
     private CarFragment carFragment;
     private MapFragment mapFragment;
-    private SettingFragment settingFragment;
+    private AboutFragment aboutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         alertFragment = new AlertFragment();
         carFragment = new CarFragment();
         mapFragment = new MapFragment();
-        settingFragment = new SettingFragment();
+        aboutFragment = new AboutFragment();
 
         setFragment(alertFragment);
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_setting:
                         mainNav.setItemBackgroundResource(R.color.colorPrimary);
-                        setFragment(settingFragment);
+                        setFragment(aboutFragment);
                         return true;
 
                         default:

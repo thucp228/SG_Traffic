@@ -3,9 +3,13 @@
     <string name="nav_alert">Cảnh báo</string>
     <string name="nav_car">Đi nhờ</string>
     <string name="nav_map">Bản đồ</string>
-    <string name="nav_setting">Cài đặt</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="nav_about">Giới thiệu</string>
+    <string name="about_description">Ứng dụng cảnh báo kẹt xe trên địa bàn Tp.HCM</string>
+    <string name="about_version">Phiên bản 1.0</string>
+    <string name="about_dev">Được phát triển bởi Phạm Tri Thức</string>
+    <string name="about_email">Email: thucp228@gmail.com</string>
+    <string name="about_fb">Facebook: fb.com/thucp.228</string>
+    <string name="about_mobile">Di động: 096 8228 710</string>
+    <string name="about_thanks">Cảm ơn đã sử dụng ứng dụng của chúng tôi!</string>
+    <string name="about_copyright">Bản quyền ©2018 Phạm Tri Thức</string>
 </resources>

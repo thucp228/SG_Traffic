@@ -21,7 +21,7 @@
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_input_add"
+        android:src="@drawable/ic_add"
         app:backgroundTint="@color/colorPrimary"
         app:fabSize="normal" />
 </FrameLayout>
