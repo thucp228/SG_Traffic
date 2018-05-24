@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "820641550568",
+    "firebase_url": "https://saigonjams.firebaseio.com",
+    "project_id": "saigonjams",
+    "storage_bucket": "saigonjams.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820641550568:android:8426313ef4e65db0",
+        "android_client_info": {
+          "package_name": "com.qteam.saigonjams"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820641550568-aih128epvgvhjuminb9etjo0gfmktun1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqZMC2SNPWFYH-rsGyZm3Z2skRexreACw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

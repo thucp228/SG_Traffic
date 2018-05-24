@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">SaiGon Jams</string>
+    <string name="app_name">TTKX TpHCM</string>
     <string name="nav_alert">Cảnh báo</string>
     <string name="nav_car">Đi nhờ</string>
     <string name="nav_map">Bản đồ</string>
     <string name="nav_setting">Cài đặt</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
