@@ -4,7 +4,7 @@
     <string name="nav_car">Đi nhờ</string>
     <string name="nav_map">Bản đồ</string>
     <string name="nav_about">Giới thiệu</string>
-    <string name="about_description">Ứng dụng cảnh báo kẹt xe trên địa bàn Tp.HCM</string>
+    <string name="about_description">Ứng dụng thông tin kẹt xe trên địa bàn Tp.HCM</string>
     <string name="about_version">Phiên bản 1.0</string>
     <string name="about_dev">Được phát triển bởi Phạm Tri Thức</string>
     <string name="about_email">Email: thucp228@gmail.com</string>
