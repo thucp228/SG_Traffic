@@ -65,11 +65,15 @@ public class CarSubmitFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         getValue();
-        String postID = dbRef.push().getKey();
-        dbRef.child(postID).setValue(carPost);
-        Toast.makeText(getContext(), "Đã đăng thông báo!", Toast.LENGTH_SHORT).show();
-        CarFragment carFragment = new CarFragment();
-        setFragment(carFragment);
+        if ((carPost.getUserName().equals("")) || (carPost.getPhoneNumber().equals("")) || (carPost.getStartPosition().equals("")) || (carPost.getEndPosition().equals("")))
+            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+        else {
+            String postID = dbRef.push().getKey();
+            dbRef.child(postID).setValue(carPost);
+            Toast.makeText(getContext(), "Đã đăng thông báo!", Toast.LENGTH_SHORT).show();
+            CarFragment carFragment = new CarFragment();
+            setFragment(carFragment);
+        }
     }
 
     private void setFragment(Fragment fragment) {

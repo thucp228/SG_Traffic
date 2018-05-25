@@ -32,7 +32,7 @@
         android:hint="Tên"
         android:inputType="textPersonName"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/edtPhone"
@@ -73,17 +73,18 @@
         android:id="@+id/spnType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_bg_spinner"/>
     
     <Button
         android:id="@+id/btnSubmit2"
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimary"
-        android:text="OK"
+        android:background="@drawable/layout_bg_button"
+        android:text="Đăng"
         android:textSize="18sp"
         android:textColor="@color/colorWhite"
-        android:elevation="5dp"/>
+        android:elevation="4dp"/>
 
 </LinearLayout>

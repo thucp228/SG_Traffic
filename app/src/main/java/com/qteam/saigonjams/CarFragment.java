@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CarFragment extends Fragment implements View.OnClickListener {
@@ -57,7 +58,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     list.setVehicleType(carPost.getVehicleType());
                     postList.add(list);
                 }
-
+                Collections.reverse(postList);
                 RecyclerViewAdapter recycler = new RecyclerViewAdapter(postList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -83,7 +84,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

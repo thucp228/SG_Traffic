@@ -2,8 +2,6 @@ package com.qteam.saigonjams;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -17,9 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -50,8 +46,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         showDefaultLocation();
 
         checkLocationPermission();
+
         googleMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
-        googleMap.setOnMyLocationClickListener(onMyLocationClickListener);
+//        googleMap.setOnMyLocationClickListener(onMyLocationClickListener);
 
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
@@ -88,20 +85,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
     };
 
-    private GoogleMap.OnMyLocationClickListener onMyLocationClickListener = new GoogleMap.OnMyLocationClickListener() {
-        @Override
-        public void onMyLocationClick(@NonNull Location location) {
-            googleMap.setMinZoomPreference(12);
-
-            CircleOptions circleOptions = new CircleOptions();
-            circleOptions.center(new LatLng(location.getLatitude(), location.getLongitude()));
-            circleOptions.radius(200);
-            circleOptions.fillColor(Color.parseColor("#40479AF7"));
-            circleOptions.strokeWidth(3);
-            circleOptions.strokeColor(Color.parseColor("#479AF7"));
-
-            googleMap.addCircle(circleOptions);
-        }
-    };
+//    private GoogleMap.OnMyLocationClickListener onMyLocationClickListener = new GoogleMap.OnMyLocationClickListener() {
+//        @Override
+//        public void onMyLocationClick(@NonNull Location location) {
+//            googleMap.setMinZoomPreference(12);
+//
+//            CircleOptions circleOptions = new CircleOptions();
+//            circleOptions.center(new LatLng(location.getLatitude(), location.getLongitude()));
+//            circleOptions.radius(200);
+//            circleOptions.fillColor(Color.parseColor("#40479AF7"));
+//            circleOptions.strokeWidth(3);
+//            circleOptions.strokeColor(Color.parseColor("#479AF7"));
+//
+//            googleMap.addCircle(circleOptions);
+//        }
+//    };
 
 }
