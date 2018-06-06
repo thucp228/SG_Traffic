@@ -1,21 +1,22 @@
-package com.qteam.saigonjams;
+package com.qteam.saigonjams.fragment;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.qteam.saigonjams.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
@@ -43,37 +44,32 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap ggMap) {
         googleMap = ggMap;
-        showDefaultLocation();
 
         checkLocationPermission();
 
         googleMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
 //        googleMap.setOnMyLocationClickListener(onMyLocationClickListener);
-
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
-    private void showDefaultLocation() {
-        Toast.makeText(getActivity(), "Hiển thị vị trí mặc định", Toast.LENGTH_SHORT).show();
-        LatLng defaultLocation = new LatLng(10.849029, 106.774181);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation));
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-    }
-
     private void checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST);
-        else if (googleMap != null)
+        String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION};
+        if (ContextCompat.checkSelfPermission(getContext(), permission[0]) == PackageManager.PERMISSION_GRANTED) {
+            showDefaultLocation();
             googleMap.setMyLocationEnabled(true);
+        }
+        else
+            requestPermissions(permission, LOCATION_PERMISSION_REQUEST);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResult) {
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
-            if (grantResult.length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED)
-                checkLocationPermission();
-            else
+            if (grantResult.length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED) {
                 showDefaultLocation();
+            }
+            else
+                return;
         }
     }
 
@@ -84,6 +80,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             return false;
         }
     };
+
+    private void showDefaultLocation() {
+        LatLng defaultLocation = new LatLng(10.849029, 106.774181);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+    }
 
 //    private GoogleMap.OnMyLocationClickListener onMyLocationClickListener = new GoogleMap.OnMyLocationClickListener() {
 //        @Override

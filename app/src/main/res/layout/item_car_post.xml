@@ -13,26 +13,27 @@
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:background="@drawable/layout_bg_item"
-    android:elevation="1dp">
+    android:elevation="2dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_user"
-            android:layout_marginRight="7dp"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginRight="5dp"/>
         <TextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Ten nguoi dang"
-            android:textSize="18sp"
+            android:text="Thuc Pham"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@color/colorBlack"/>
     </LinearLayout>
 
@@ -40,80 +41,107 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_phone"
-            android:layout_marginRight="7dp"
-            android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvPhone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="SDT"
-            android:textSize="18sp"
-            android:textColor="@color/colorBlack"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_user_location"
+            android:text="• Đi từ:"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
             android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvStartPos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Vi tri bat dau"
-            android:textSize="18sp"
+            android:text="DH Cong nghe Thong tin"
+            android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
         android:layout_marginBottom="5dp">
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_marker"
+            android:text="• Đến:"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
             android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvEndPos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Vi tri ket thuc"
-            android:textSize="18sp"
+            android:text="Vincom Le Van Viet, Q9"
+            android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
-        android:orientation="horizontal">
-        <ImageView
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_vehicle"
+            android:text="• Điện thoại:"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="5dp"/>
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="096 8228 710"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="• Phương tiện:"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
             android:layout_marginRight="7dp"
             android:layout_marginLeft="5dp"/>
         <TextView
             android:id="@+id/tvVehicleType"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Loai xe"
-            android:textSize="18sp"
+            android:text="Jupiter GP"
+            android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right">
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="30/5/2018 4:00 PM"
+            android:textSize="13sp"/>
     </LinearLayout>
 
 </LinearLayout>

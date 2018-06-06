@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AlertSubmitFragment"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Thông báo kẹt xe - tắc đường"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vị trí"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/edtPosition"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vị trí kẹt xe"
+        android:textSize="16sp"
+        android:inputType="textCapWords"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tình trạng"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginBottom="10dp"/>
+
+    <Spinner
+        android:id="@+id/spnStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/layout_bg_spinner"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/btnAddImg"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/layout_bg_button"
+            android:text="Thêm ảnh"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:elevation="4dp"
+            android:layout_marginRight="50dp"/>
+        <Button
+            android:id="@+id/btnSubmit1"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/layout_bg_button"
+            android:text="Đăng"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            android:elevation="4dp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_no_image"/>
+
+</LinearLayout>

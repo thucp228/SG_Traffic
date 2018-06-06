@@ -1,4 +1,4 @@
-package com.qteam.saigonjams;
+package com.qteam.saigonjams.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,12 +17,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.qteam.saigonjams.model.CarPost;
+import com.qteam.saigonjams.model.ListPost;
+import com.qteam.saigonjams.R;
+import com.qteam.saigonjams.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CarFragment extends Fragment implements View.OnClickListener {
+
+    private static final String DATABASE_PATH = "Car_Posts";
 
     private FloatingActionButton fabAdd;
     private FirebaseDatabase fbDatabase;
@@ -42,7 +48,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         recyclerView = view.findViewById(R.id.rcvCarList);
 
         fbDatabase = FirebaseDatabase.getInstance();
-        dbRef = fbDatabase.getReference("CarPost");
+        dbRef = fbDatabase.getReference(DATABASE_PATH);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -56,6 +62,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                     list.setStartPosition(carPost.getStartPosition());
                     list.setEndPosition(carPost.getEndPosition());
                     list.setVehicleType(carPost.getVehicleType());
+                    list.setDate(carPost.getDate());
                     postList.add(list);
                 }
                 Collections.reverse(postList);

@@ -1,4 +1,4 @@
-package com.qteam.saigonjams;
+package com.qteam.saigonjams.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +12,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.qteam.saigonjams.fragment.AboutFragment;
+import com.qteam.saigonjams.fragment.AlertFragment;
+import com.qteam.saigonjams.fragment.CarFragment;
+import com.qteam.saigonjams.fragment.MapFragment;
+import com.qteam.saigonjams.R;
+
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {

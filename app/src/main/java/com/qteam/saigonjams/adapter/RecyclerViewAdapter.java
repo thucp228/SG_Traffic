@@ -1,10 +1,13 @@
-package com.qteam.saigonjams;
+package com.qteam.saigonjams.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.qteam.saigonjams.model.ListPost;
+import com.qteam.saigonjams.R;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tvStartPos.setText(post.getStartPosition());
         holder.tvEndPos.setText(post.getEndPosition());
         holder.tvVehicleType.setText(post.getVehicleType());
+        holder.tvDate.setText(post.getDate());
     }
 
     @Override
@@ -40,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPhone, tvStartPos, tvEndPos, tvVehicleType;
+        TextView tvName, tvPhone, tvStartPos, tvEndPos, tvVehicleType, tvDate;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -49,6 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvStartPos = itemView.findViewById(R.id.tvStartPos);
             tvEndPos = itemView.findViewById(R.id.tvEndPos);
             tvVehicleType = itemView.findViewById(R.id.tvVehicleType);
+            tvDate = itemView.findViewById(R.id.tvDate);
         }
     }
 }

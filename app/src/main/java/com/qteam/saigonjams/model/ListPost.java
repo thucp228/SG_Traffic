@@ -1,20 +1,17 @@
-package com.qteam.saigonjams;
+package com.qteam.saigonjams.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
-@IgnoreExtraProperties
-public class CarPost {
-
+public class ListPost {
     private String userName;
     private String phoneNumber;
     private String startPosition;
     private String endPosition;
     private String vehicleType;
+    private String date;
 
-    public CarPost() {
+    public ListPost() {
     }
 
-    public CarPost(String name, String phone, String startPos, String endPos, String vehicleType) {
+    public ListPost(String name, String phone, String startPos, String endPos, String vehicleType) {
         this.userName = name;
         this.phoneNumber = phone;
         this.startPosition = startPos;
@@ -60,5 +57,13 @@ public class CarPost {
 
     public String getVehicleType() {
         return vehicleType;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
