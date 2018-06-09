@@ -18,9 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.qteam.saigonjams.model.CarPost;
-import com.qteam.saigonjams.model.ListPost;
 import com.qteam.saigonjams.R;
-import com.qteam.saigonjams.adapter.RecyclerViewAdapter;
+import com.qteam.saigonjams.adapter.CarRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +33,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
     private FirebaseDatabase fbDatabase;
     private DatabaseReference dbRef;
     private RecyclerView recyclerView;
-    List<ListPost> postList;
+    private List<CarPost> postList;
 
     public CarFragment() {
         // Required empty public constructor
@@ -54,24 +53,17 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList = new ArrayList<>();
-                for (DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
-                    CarPost carPost = dataSnapshot1.getValue(CarPost.class);
-                    ListPost list = new ListPost();
-                    list.setUserName(carPost.getUserName());
-                    list.setPhoneNumber(carPost.getPhoneNumber());
-                    list.setStartPosition(carPost.getStartPosition());
-                    list.setEndPosition(carPost.getEndPosition());
-                    list.setVehicleType(carPost.getVehicleType());
-                    list.setDate(carPost.getDate());
-                    postList.add(list);
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    CarPost carPost = postSnapshot.getValue(CarPost.class);
+                    postList.add(carPost);
                 }
                 Collections.reverse(postList);
-                RecyclerViewAdapter recycler = new RecyclerViewAdapter(postList);
+                CarRecyclerViewAdapter adapter = new CarRecyclerViewAdapter(postList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(recycler);
+                recyclerView.setAdapter(adapter);
             }
 
             @Override

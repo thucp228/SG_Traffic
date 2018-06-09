@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="5dp"/>
 
@@ -34,45 +35,83 @@
         android:text="@string/about_version"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_dev"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginBottom="5dp"/>
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_email"
+        android:text="Phạm Tri Thức"
         android:textSize="16sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginBottom="5dp"/>
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_fb"
+        android:text="Nguyễn Lê Quang"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_contact"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="facebook.com/thucp.228"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="facebook.com/tisdk96"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_mobile"
         android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="096 8228 710"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="016 676 34 325"
+        android:textSize="16sp"
         android:textColor="@color/colorBlack"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/about_thanks"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="30dp"/>
 

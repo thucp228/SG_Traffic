@@ -46,7 +46,7 @@
     <Spinner
         android:id="@+id/spnStatus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/layout_bg_spinner"/>
 
@@ -54,29 +54,29 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="15dp"
         android:gravity="center_horizontal">
         <Button
             android:id="@+id/btnAddImg"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/layout_bg_button"
             android:text="Thêm ảnh"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
-            android:elevation="4dp"
-            android:layout_marginRight="50dp"/>
+            android:elevation="5dp"
+            android:layout_marginRight="30dp"/>
         <Button
             android:id="@+id/btnSubmit1"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/layout_bg_button"
             android:text="Đăng"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
-            android:elevation="4dp"/>
+            android:elevation="5dp"/>
     </LinearLayout>
 
     <ImageView

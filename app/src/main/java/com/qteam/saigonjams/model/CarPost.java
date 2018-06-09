@@ -15,24 +15,13 @@ public class CarPost {
     public CarPost() {
     }
 
-    public void setUserName(String userName) {
+    public CarPost(String userName, String phoneNumber, String startPosition, String endPosition, String vehicleType, String date) {
         this.userName = userName;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public void setStartPosition(String startPosition) {
         this.startPosition = startPosition;
-    }
-
-    public void setEndPosition(String endPosition) {
         this.endPosition = endPosition;
-    }
-
-    public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
+        this.date = date;
     }
 
     public String getUserName() {
@@ -59,7 +48,4 @@ public class CarPost {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

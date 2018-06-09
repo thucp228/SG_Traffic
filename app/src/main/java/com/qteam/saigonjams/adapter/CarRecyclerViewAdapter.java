@@ -6,17 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.qteam.saigonjams.model.ListPost;
+import com.qteam.saigonjams.model.CarPost;
 import com.qteam.saigonjams.R;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolder> {
+public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerViewAdapter.RecyclerViewHolder> {
 
-    List<ListPost> listPost;
+    private List<CarPost> carPostList;
 
-    public RecyclerViewAdapter(List<ListPost> list) {
-        this.listPost = list;
+    public CarRecyclerViewAdapter(List<CarPost> list) {
+        this.carPostList = list;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-        ListPost post = listPost.get(position);
+        CarPost post = carPostList.get(position);
         holder.tvName.setText(post.getUserName());
         holder.tvPhone.setText(post.getPhoneNumber());
         holder.tvStartPos.setText(post.getStartPosition());
@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return listPost.size();
+        return carPostList.size();
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -48,12 +48,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
+
             tvName = itemView.findViewById(R.id.tvName);
             tvPhone = itemView.findViewById(R.id.tvPhone);
             tvStartPos = itemView.findViewById(R.id.tvStartPos);
             tvEndPos = itemView.findViewById(R.id.tvEndPos);
             tvVehicleType = itemView.findViewById(R.id.tvVehicleType);
-            tvDate = itemView.findViewById(R.id.tvDate);
+            tvDate = itemView.findViewById(R.id.tvCarDate);
         }
     }
 }

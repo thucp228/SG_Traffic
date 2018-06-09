@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment.AlertFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvAlertList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlackTransparent"
+        android:scrollbars="vertical"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_1"
         android:layout_width="wrap_content"
@@ -16,6 +23,6 @@
         android:clickable="true"
         android:src="@drawable/ic_add"
         app:backgroundTint="@color/colorPrimary"
-        app:fabSize="normal" />
+        app:fabSize="normal"/>
 
 </FrameLayout>

@@ -75,19 +75,19 @@
     <Spinner
         android:id="@+id/spnType"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/layout_bg_spinner"/>
     
     <Button
         android:id="@+id/btnSubmit2"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/layout_bg_button"
         android:text="Đăng"
         android:textSize="16sp"
         android:textColor="@color/colorWhite"
-        android:elevation="4dp"/>
+        android:elevation="5dp"/>
 
 </LinearLayout>

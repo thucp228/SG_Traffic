@@ -29,7 +29,6 @@ public class CarSubmitFragment extends Fragment {
     private EditText name, phone, startPos, endPos;
     private Spinner vehicleType;
     private Button buttonPost;
-    private CarPost carPost;
 
     public CarSubmitFragment() {
         // Required empty public constructor
@@ -65,10 +64,21 @@ public class CarSubmitFragment extends Fragment {
     }
 
     private void postCar() {
-        getValue();
-        if ((carPost.getUserName().equals("")) || (carPost.getPhoneNumber().equals("")) || (carPost.getStartPosition().equals("")) || (carPost.getEndPosition().equals("")))
+        if ((name.getText().toString().trim().equals(""))
+                || (phone.getText().toString().trim().equals(""))
+                || (startPos.getText().toString().trim().equals(""))
+                || (endPos.getText().toString().equals("")))
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
         else {
+            String userName = name.getText().toString().trim();
+            String phoneNumber = phone.getText().toString().trim();
+            String startPosition = startPos.getText().toString().trim();
+            String endPosition = endPos.getText().toString().trim();
+            String vehicle = vehicleType.getSelectedItem().toString();
+            String date = getCurrentTime();
+
+            CarPost carPost = new CarPost(userName, phoneNumber, startPosition, endPosition, vehicle, date);
+
             String postID = dbRef.push().getKey();
             dbRef.child(postID).setValue(carPost);
 
@@ -84,16 +94,6 @@ public class CarSubmitFragment extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a");
         String currentTime = dateFormat.format(calendar.getTime());
         return currentTime;
-    }
-
-    public void getValue() {
-        carPost = new CarPost();
-        carPost.setDate(getCurrentTime());
-        carPost.setUserName(name.getText().toString().trim());
-        carPost.setPhoneNumber(phone.getText().toString().trim());
-        carPost.setStartPosition(startPos.getText().toString().trim());
-        carPost.setEndPosition(endPos.getText().toString().trim());
-        carPost.setVehicleType(vehicleType.getSelectedItem().toString());
     }
 
     private void setFragment(Fragment fragment) {

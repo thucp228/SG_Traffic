@@ -1,44 +1,61 @@
 package com.qteam.saigonjams.fragment;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+
 import com.qteam.saigonjams.R;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int LOCATION_PERMISSION_REQUEST = 1;
+    private static final int LOCATION_REQUEST = 2;
 
     private GoogleMap googleMap;
-    private MapView mapView;
+    private GoogleApiClient googleApiClient;
+    PendingResult<LocationSettingsResult> result;
 
     public MapFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-         mapView = rootView.findViewById(R.id.mapView);
+         MapView mapView = view.findViewById(R.id.mapView);
          if (mapView != null) {
              mapView.onCreate(null);
              mapView.onResume();
              mapView.getMapAsync(this);
          }
-         return rootView;
+         return view;
     }
 
     @Override
@@ -48,7 +65,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         checkLocationPermission();
 
         googleMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
-//        googleMap.setOnMyLocationClickListener(onMyLocationClickListener);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
@@ -57,6 +73,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (ContextCompat.checkSelfPermission(getContext(), permission[0]) == PackageManager.PERMISSION_GRANTED) {
             showDefaultLocation();
             googleMap.setMyLocationEnabled(true);
+            requestLocationSettings();
         }
         else
             requestPermissions(permission, LOCATION_PERMISSION_REQUEST);
@@ -67,9 +84,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
             if (grantResult.length > 0 && grantResult[0] == PackageManager.PERMISSION_GRANTED) {
                 showDefaultLocation();
+                requestLocationSettings();
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                    googleMap.setMyLocationEnabled(true);
             }
             else
-                return;
+                showDefaultLocation();
         }
     }
 
@@ -87,20 +107,72 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(15));
     }
 
-//    private GoogleMap.OnMyLocationClickListener onMyLocationClickListener = new GoogleMap.OnMyLocationClickListener() {
-//        @Override
-//        public void onMyLocationClick(@NonNull Location location) {
-//            googleMap.setMinZoomPreference(12);
-//
-//            CircleOptions circleOptions = new CircleOptions();
-//            circleOptions.center(new LatLng(location.getLatitude(), location.getLongitude()));
-//            circleOptions.radius(200);
-//            circleOptions.fillColor(Color.parseColor("#40479AF7"));
-//            circleOptions.strokeWidth(3);
-//            circleOptions.strokeColor(Color.parseColor("#479AF7"));
-//
-//            googleMap.addCircle(circleOptions);
-//        }
-//    };
+    private void requestLocationSettings() {
+        googleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).build();
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(30 * 1000);
+        locationRequest.setFastestInterval(5 * 1000);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        builder.setAlwaysShow(true);
+
+        result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+                final Status status = locationSettingsResult.getStatus();
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        try {
+                            status.startResolutionForResult(getActivity(), LOCATION_REQUEST);
+                        }
+                        catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                        }
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        break;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case LOCATION_REQUEST:
+                switch (resultCode) {
+                    case Activity.RESULT_OK: {
+                        Toast.makeText(getActivity(), "Đã bật GPS!", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case Activity.RESULT_CANCELED: {
+                        Toast.makeText(getActivity(), "Từ chối bật GPS!", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
 
 }

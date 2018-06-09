@@ -45,6 +45,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AlertSubmitFragment extends Fragment {
@@ -60,7 +61,6 @@ public class AlertSubmitFragment extends Fragment {
     private Button buttonAddImg, buttonPost;
     private ImageView imageView;
     private Uri fileURI;
-    private AlertPost alertPost;
     private ProgressDialog progressDialog;
 
     private FirebaseDatabase fbDB;
@@ -207,10 +207,11 @@ public class AlertSubmitFragment extends Fragment {
         }
     }
 
-    private void getValue() {
-        alertPost = new AlertPost();
-        alertPost.setPosition(position.getText().toString().trim());
-        alertPost.setStatus(status.getSelectedItem().toString());
+    public String getCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a");
+        String currentTime = dateFormat.format(calendar.getTime());
+        return currentTime;
     }
 
     private String getFileExtension(Uri uri) {
@@ -221,13 +222,12 @@ public class AlertSubmitFragment extends Fragment {
     }
 
     private void postAlert() {
-        getValue();
         if (fileURI != null) {
-            if (alertPost.getPosition().equals("")) {
+            if (position.getText().toString().equals("")) {
                 Toast.makeText(getContext(), "Vui lòng nhập vị trí!", Toast.LENGTH_SHORT).show();
             }
             else {
-                progressDialog.setTitle("Đang tải ảnh lên...");
+                progressDialog.setMessage("Đang tải ảnh lên...");
                 progressDialog.show();
 
                 StorageReference storageRef2nd = storageRef.child(STORAGE_PATH + System.currentTimeMillis() + "." + getFileExtension(fileURI));
@@ -235,7 +235,12 @@ public class AlertSubmitFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                String pos = position.getText().toString().trim();
+                                String stt = status.getSelectedItem().toString();
+                                String date = getCurrentTime();
                                 progressDialog.dismiss();
+
+                                AlertPost alertPost = new AlertPost(pos, stt, date, taskSnapshot.getDownloadUrl().toString());
 
                                 String postID = dbRef.push().getKey();
                                 dbRef.child(postID).setValue(alertPost);
@@ -256,7 +261,7 @@ public class AlertSubmitFragment extends Fragment {
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.setTitle("Đang tải ảnh lên...");
+                                progressDialog.setMessage("Đang tải ảnh lên...");
                             }
                         });
             }
