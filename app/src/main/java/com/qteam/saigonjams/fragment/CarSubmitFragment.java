@@ -19,6 +19,7 @@ import com.qteam.saigonjams.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class CarSubmitFragment extends Fragment {
 
@@ -91,7 +92,7 @@ public class CarSubmitFragment extends Fragment {
 
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
         String currentTime = dateFormat.format(calendar.getTime());
         return currentTime;
     }

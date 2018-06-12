@@ -1,5 +1,6 @@
 package com.qteam.saigonjams.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,7 @@ public class CarFragment extends Fragment implements View.OnClickListener {
     private DatabaseReference dbRef;
     private RecyclerView recyclerView;
     private List<CarPost> postList;
+    private ProgressDialog progressDialog;
 
     public CarFragment() {
         // Required empty public constructor
@@ -45,6 +47,10 @@ public class CarFragment extends Fragment implements View.OnClickListener {
         fabAdd = view.findViewById(R.id.fab_add_2);
         fabAdd.setOnClickListener(this);
         recyclerView = view.findViewById(R.id.rcvCarList);
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Đang tải...");
+        progressDialog.show();
 
         fbDatabase = FirebaseDatabase.getInstance();
         dbRef = fbDatabase.getReference(DATABASE_PATH);
@@ -64,11 +70,13 @@ public class CarFragment extends Fragment implements View.OnClickListener {
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
                 recyclerView.setAdapter(adapter);
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("ReadData", "Failed to read data");
+                progressDialog.dismiss();
             }
         });
 

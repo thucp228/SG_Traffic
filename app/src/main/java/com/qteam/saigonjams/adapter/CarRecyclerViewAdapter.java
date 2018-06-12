@@ -1,5 +1,6 @@
 package com.qteam.saigonjams.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
     }
 
     @Override
-    public RecyclerViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public @NonNull RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_car_post, viewGroup, false);
 
         RecyclerViewHolder holder = new RecyclerViewHolder(view);
@@ -28,7 +29,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         CarPost post = carPostList.get(position);
         holder.tvName.setText(post.getUserName());
         holder.tvPhone.setText(post.getPhoneNumber());

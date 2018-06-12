@@ -41,7 +41,6 @@ public class AlertFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alert, container, false);
@@ -51,7 +50,7 @@ public class AlertFragment extends Fragment implements View.OnClickListener {
         recyclerView.setHasFixedSize(true);
 
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Đang tải ảnh từ server...");
+        progressDialog.setMessage("Đang tải...");
         progressDialog.show();
 
         fbDatabase = FirebaseDatabase.getInstance();

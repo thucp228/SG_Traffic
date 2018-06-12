@@ -1,6 +1,7 @@
 package com.qteam.saigonjams.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -8,13 +9,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -40,13 +38,9 @@ import com.google.firebase.storage.UploadTask;
 import com.qteam.saigonjams.R;
 import com.qteam.saigonjams.model.AlertPost;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Locale;
 
 public class AlertSubmitFragment extends Fragment {
 
@@ -161,36 +155,13 @@ public class AlertSubmitFragment extends Fragment {
         startActivityForResult(cameraIntent, CAMERA);
     }
 
-    private String saveImage(Bitmap bitmap) {
-        ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bAOS);
-        File photoDirectory = new File(Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        if (!photoDirectory.exists())
-            photoDirectory.mkdirs();
-        try {
-            File file = new File(photoDirectory, timeStamp + ".jpg");
-            file.createNewFile();
-            FileOutputStream fOS = new FileOutputStream(file);
-            fOS.write(bAOS.toByteArray());
-            MediaScannerConnection.scanFile(getActivity(), new String[] {file.getPath()}, new String[] {"image/jpeg"}, null);
-            fOS.close();
-
-            return file.getAbsolutePath();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == getActivity().RESULT_CANCELED)
+        if (resultCode == Activity.RESULT_CANCELED)
             return;
-        if (resultCode == getActivity().RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             if (requestCode == GALLERY) {
                 if (data != null) {
                     fileURI = data.getData();
@@ -209,7 +180,7 @@ public class AlertSubmitFragment extends Fragment {
 
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
         String currentTime = dateFormat.format(calendar.getTime());
         return currentTime;
     }
@@ -217,7 +188,6 @@ public class AlertSubmitFragment extends Fragment {
     private String getFileExtension(Uri uri) {
         ContentResolver contentResolver = getActivity().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
