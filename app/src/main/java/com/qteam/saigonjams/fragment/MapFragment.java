@@ -64,6 +64,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
         checkLocationPermission();
 
+        googleMap.setTrafficEnabled(true);
         googleMap.setOnMyLocationButtonClickListener(onMyLocationButtonClickListener);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
