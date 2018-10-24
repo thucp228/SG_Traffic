@@ -67,7 +67,7 @@ public class AlertSubmitFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_alert_submit, container, false);
 
@@ -119,8 +119,6 @@ public class AlertSubmitFragment extends Fragment {
         if (requestCode == PERMISSIONS_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 showAddImageDialog();
-            else
-                return;
         }
     }
 
@@ -145,8 +143,8 @@ public class AlertSubmitFragment extends Fragment {
     }
 
     private void selectImageFromGallery() {
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        galleryIntent.setType("image/*");
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        galleryIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
         startActivityForResult(galleryIntent, GALLERY);
     }
 
@@ -200,7 +198,7 @@ public class AlertSubmitFragment extends Fragment {
                 progressDialog.setMessage("Đang tải ảnh lên...");
                 progressDialog.show();
 
-                StorageReference storageRef2nd = storageRef.child(STORAGE_PATH + System.currentTimeMillis() + "." + getFileExtension(fileURI));
+                final StorageReference storageRef2nd = storageRef.child(STORAGE_PATH + System.currentTimeMillis() + "." + getFileExtension(fileURI));
                 storageRef2nd.putFile(fileURI)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -210,7 +208,7 @@ public class AlertSubmitFragment extends Fragment {
                                 String date = getCurrentTime();
                                 progressDialog.dismiss();
 
-                                AlertPost alertPost = new AlertPost(pos, stt, date, taskSnapshot.getDownloadUrl().toString());
+                                AlertPost alertPost = new AlertPost(pos, stt, date, storageRef2nd.getDownloadUrl().toString());
 
                                 String postID = dbRef.push().getKey();
                                 dbRef.child(postID).setValue(alertPost);

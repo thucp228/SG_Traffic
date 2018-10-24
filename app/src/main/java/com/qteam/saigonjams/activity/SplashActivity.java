@@ -2,7 +2,6 @@ package com.qteam.saigonjams.activity;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
@@ -16,9 +15,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
 
         setContentView(R.layout.activity_splash);
 
