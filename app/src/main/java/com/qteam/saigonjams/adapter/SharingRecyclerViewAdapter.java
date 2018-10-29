@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.qteam.saigonjams.model.CarPost;
+import com.qteam.saigonjams.model.Sharing;
 import com.qteam.saigonjams.R;
 
 import java.util.List;
 
-public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerViewAdapter.RecyclerViewHolder> {
+public class SharingRecyclerViewAdapter extends RecyclerView.Adapter<SharingRecyclerViewAdapter.RecyclerViewHolder> {
 
-    private List<CarPost> carPostList;
+    private List<Sharing> sharingList;
 
-    public CarRecyclerViewAdapter(List<CarPost> list) {
-        this.carPostList = list;
+    public SharingRecyclerViewAdapter(List<Sharing> list) {
+        this.sharingList = list;
     }
 
     @Override
     public @NonNull RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_car_post, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_sharing, viewGroup, false);
 
         RecyclerViewHolder holder = new RecyclerViewHolder(view);
         return holder;
@@ -30,7 +30,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        CarPost post = carPostList.get(position);
+        Sharing post = sharingList.get(position);
         holder.tvName.setText(post.getUserName());
         holder.tvPhone.setText(post.getPhoneNumber());
         holder.tvStartPos.setText(post.getStartPosition());
@@ -41,7 +41,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
 
     @Override
     public int getItemCount() {
-        return carPostList.size();
+        return sharingList.size();
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -50,12 +50,12 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
         public RecyclerViewHolder(View itemView) {
             super(itemView);
 
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPhone = itemView.findViewById(R.id.tvPhone);
-            tvStartPos = itemView.findViewById(R.id.tvStartPos);
-            tvEndPos = itemView.findViewById(R.id.tvEndPos);
-            tvVehicleType = itemView.findViewById(R.id.tvVehicleType);
-            tvDate = itemView.findViewById(R.id.tvCarDate);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvPhone = itemView.findViewById(R.id.tv_phone_number);
+            tvStartPos = itemView.findViewById(R.id.tv_start_position);
+            tvEndPos = itemView.findViewById(R.id.tv_end_position);
+            tvVehicleType = itemView.findViewById(R.id.tv_transport);
+            tvDate = itemView.findViewById(R.id.tv_shared_time);
         }
     }
 }

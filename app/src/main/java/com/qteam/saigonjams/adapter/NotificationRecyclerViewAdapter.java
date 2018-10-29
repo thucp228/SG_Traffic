@@ -10,22 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.qteam.saigonjams.model.AlertPost;
+import com.qteam.saigonjams.model.Notification;
 import com.qteam.saigonjams.R;
 
 import java.util.List;
 
-public class AlertRecyclerViewAdapter extends RecyclerView.Adapter<AlertRecyclerViewAdapter.RecyclerViewHolder> {
+public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<NotificationRecyclerViewAdapter.RecyclerViewHolder> {
 
-    private List<AlertPost> alertPostList;
+    private List<Notification> notificationList;
 
-    public AlertRecyclerViewAdapter(List<AlertPost> alertPostList) {
-        this.alertPostList = alertPostList;
+    public NotificationRecyclerViewAdapter(List<Notification> notificationList) {
+        this.notificationList = notificationList;
     }
 
     @Override
     public @NonNull RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_alert_post, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_notifications, viewGroup, false);
 
         RecyclerViewHolder holder = new RecyclerViewHolder(view);
         return holder;
@@ -33,7 +33,7 @@ public class AlertRecyclerViewAdapter extends RecyclerView.Adapter<AlertRecycler
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        AlertPost post = alertPostList.get(position);
+        Notification post = notificationList.get(position);
 
         holder.tvPosition.setText(post.getPosition());
         holder.tvStatus.setText(post.getStatus());
@@ -62,7 +62,7 @@ public class AlertRecyclerViewAdapter extends RecyclerView.Adapter<AlertRecycler
 
     @Override
     public int getItemCount() {
-        return alertPostList.size();
+        return notificationList.size();
     }
 
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -72,10 +72,10 @@ public class AlertRecyclerViewAdapter extends RecyclerView.Adapter<AlertRecycler
         public RecyclerViewHolder(View itemView) {
             super(itemView);
 
-            tvPosition = itemView.findViewById(R.id.tvLocation);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
-            tvDate = itemView.findViewById(R.id.tvAlertDate);
-            imageView = itemView.findViewById(R.id.imgViewPost);
+            tvPosition = itemView.findViewById(R.id.tv_location);
+            tvStatus = itemView.findViewById(R.id.tv_status);
+            tvDate = itemView.findViewById(R.id.tv_posted_time);
+            imageView = itemView.findViewById(R.id.image_view_notification);
         }
     }
 }

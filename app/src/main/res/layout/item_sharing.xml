@@ -8,27 +8,26 @@
     android:paddingRight="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="7dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:background="@drawable/layout_bg_item"
-    android:elevation="2dp">
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:background="@drawable/bg_item">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_user"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
-            android:id="@+id/tvName"
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Thuc Pham"
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp">
         <TextView
             android:layout_width="match_parent"
@@ -52,7 +51,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvStartPos"
+            android:id="@+id/tv_start_position"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="DH Cong nghe Thong tin"
@@ -64,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp">
         <TextView
             android:layout_width="match_parent"
@@ -75,7 +74,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvEndPos"
+            android:id="@+id/tv_end_position"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Vincom Le Van Viet, Q9"
@@ -87,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp">
         <TextView
             android:layout_width="match_parent"
@@ -98,7 +97,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvPhone"
+            android:id="@+id/tv_phone_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="096 8228 710"
@@ -109,7 +108,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         <TextView
@@ -121,7 +120,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvVehicleType"
+            android:id="@+id/tv_transport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Jupiter GP"
@@ -130,10 +129,10 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvCarDate"
+        android:id="@+id/tv_shared_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:text="30/5/2018 4:00 PM"
         android:textSize="13sp"/>
 

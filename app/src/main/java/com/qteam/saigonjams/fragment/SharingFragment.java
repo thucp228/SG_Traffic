@@ -18,15 +18,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.qteam.saigonjams.model.CarPost;
+import com.qteam.saigonjams.model.Sharing;
 import com.qteam.saigonjams.R;
-import com.qteam.saigonjams.adapter.CarRecyclerViewAdapter;
+import com.qteam.saigonjams.adapter.SharingRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CarFragment extends Fragment implements View.OnClickListener {
+public class SharingFragment extends Fragment implements View.OnClickListener {
 
     private static final String DATABASE_PATH = "Car_Posts";
 
@@ -34,19 +34,19 @@ public class CarFragment extends Fragment implements View.OnClickListener {
     private FirebaseDatabase fbDatabase;
     private DatabaseReference dbRef;
     private RecyclerView recyclerView;
-    private List<CarPost> postList;
+    private List<Sharing> postList;
     private ProgressDialog progressDialog;
 
-    public CarFragment() {
+    public SharingFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_car, container, false);
-        fabAdd = view.findViewById(R.id.fab_add_2);
+        View view = inflater.inflate(R.layout.fragment_sharing, container, false);
+        fabAdd = view.findViewById(R.id.fab_add_sharing);
         fabAdd.setOnClickListener(this);
-        recyclerView = view.findViewById(R.id.rcvCarList);
+        recyclerView = view.findViewById(R.id.rcv_sharing_list);
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Đang tải...");
@@ -60,11 +60,11 @@ public class CarFragment extends Fragment implements View.OnClickListener {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList = new ArrayList<>();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    CarPost carPost = postSnapshot.getValue(CarPost.class);
-                    postList.add(carPost);
+                    Sharing sharing = postSnapshot.getValue(Sharing.class);
+                    postList.add(sharing);
                 }
                 Collections.reverse(postList);
-                CarRecyclerViewAdapter adapter = new CarRecyclerViewAdapter(postList);
+                SharingRecyclerViewAdapter adapter = new SharingRecyclerViewAdapter(postList);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(linearLayoutManager);
@@ -85,14 +85,14 @@ public class CarFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        CarSubmitFragment carSubmitFragment = new CarSubmitFragment();
-        setFragment(carSubmitFragment);
+        AddSharingFragment addSharingFragment = new AddSharingFragment();
+        setFragment(addSharingFragment);
     }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.replace(R.id.frame_container, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

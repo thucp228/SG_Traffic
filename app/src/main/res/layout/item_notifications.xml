@@ -8,27 +8,26 @@
     android:paddingRight="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="7dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:background="@drawable/layout_bg_item"
-    android:elevation="2dp">
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:background="@drawable/bg_item">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_location"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginEnd="5dp"/>
         <TextView
-            android:id="@+id/tvLocation"
+            android:id="@+id/tv_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Vi tri ket xe"
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="5dp">
         <TextView
             android:layout_width="match_parent"
@@ -52,7 +51,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/tvStatus"
+            android:id="@+id/tv_status"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Thong thoang"
@@ -62,7 +61,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imgViewPost"
+        android:id="@+id/image_view_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
@@ -70,7 +69,7 @@
         android:src="@drawable/ic_no_image"/>
 
     <TextView
-        android:id="@+id/tvAlertDate"
+        android:id="@+id/tv_posted_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

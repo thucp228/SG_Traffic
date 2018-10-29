@@ -19,11 +19,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAgxUKOOceax2CXOZn-KHbcHR4VaID86gk"/>
-
         <activity
-            android:name=".activity.MainActivity"/>
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

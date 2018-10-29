@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.qteam.saigonjams.model.CarPost;
+import com.qteam.saigonjams.model.Sharing;
 import com.qteam.saigonjams.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class CarSubmitFragment extends Fragment {
+public class AddSharingFragment extends Fragment {
 
     private static final String DATABASE_PATH = "Car_Posts";
 
@@ -31,20 +31,20 @@ public class CarSubmitFragment extends Fragment {
     private Spinner vehicleType;
     private Button buttonPost;
 
-    public CarSubmitFragment() {
+    public AddSharingFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_car_submit, container, false);
+        View view = inflater.inflate(R.layout.fragment_sharing_add, container, false);
 
-        name = view.findViewById(R.id.edtName);
-        phone = view.findViewById(R.id.edtPhone);
-        startPos = view.findViewById(R.id.edtStartPosition);
-        endPos = view.findViewById(R.id.edtEndPosition);
-        vehicleType = view.findViewById(R.id.spnType);
-        buttonPost = view.findViewById(R.id.btnSubmit2);
+        name = view.findViewById(R.id.et_name);
+        phone = view.findViewById(R.id.et_phone_number);
+        startPos = view.findViewById(R.id.et_start_position);
+        endPos = view.findViewById(R.id.et_end_position);
+        vehicleType = view.findViewById(R.id.spn_transport);
+        buttonPost = view.findViewById(R.id.btn_post_sharing);
 
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,15 +78,15 @@ public class CarSubmitFragment extends Fragment {
             String vehicle = vehicleType.getSelectedItem().toString();
             String date = getCurrentTime();
 
-            CarPost carPost = new CarPost(userName, phoneNumber, startPosition, endPosition, vehicle, date);
+            Sharing sharing = new Sharing(userName, phoneNumber, startPosition, endPosition, vehicle, date);
 
             String postID = dbRef.push().getKey();
-            dbRef.child(postID).setValue(carPost);
+            dbRef.child(postID).setValue(sharing);
 
             Toast.makeText(getContext(), "Đã đăng thông báo!", Toast.LENGTH_SHORT).show();
 
-            CarFragment carFragment = new CarFragment();
-            setFragment(carFragment);
+            SharingFragment sharingFragment = new SharingFragment();
+            setFragment(sharingFragment);
         }
     }
 
@@ -100,7 +100,7 @@ public class CarSubmitFragment extends Fragment {
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.replace(R.id.frame_container, fragment);
         fragmentTransaction.commit();
     }
 

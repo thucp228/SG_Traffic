@@ -36,13 +36,13 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.qteam.saigonjams.R;
-import com.qteam.saigonjams.model.AlertPost;
+import com.qteam.saigonjams.model.Notification;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AlertSubmitFragment extends Fragment {
+public class AddNotificationsFragment extends Fragment {
 
     private static final String IMAGE_DIRECTORY = "/TTKXHCM";
     private static final String DATABASE_PATH = "Alert_Posts";
@@ -62,21 +62,21 @@ public class AlertSubmitFragment extends Fragment {
     private DatabaseReference dbRef;
     private StorageReference storageRef;
 
-    public AlertSubmitFragment() {
+    public AddNotificationsFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_alert_submit, container, false);
+        View view = inflater.inflate(R.layout.fragment_notifications_add, container, false);
 
-        position = view.findViewById(R.id.edtPosition);
-        status = view.findViewById(R.id.spnStatus);
-        imageView = view.findViewById(R.id.imgView);
+        position = view.findViewById(R.id.et_position);
+        status = view.findViewById(R.id.spn_status);
+        imageView = view.findViewById(R.id.image_view);
         progressDialog = new ProgressDialog(getContext());
 
-        buttonAddImg = view.findViewById(R.id.btnAddImg);
+        buttonAddImg = view.findViewById(R.id.btn_add_image);
         buttonAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +84,7 @@ public class AlertSubmitFragment extends Fragment {
             }
         });
 
-        buttonPost = view.findViewById(R.id.btnSubmit1);
+        buttonPost = view.findViewById(R.id.btn_post_notification);
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,15 +208,15 @@ public class AlertSubmitFragment extends Fragment {
                                 String date = getCurrentTime();
                                 progressDialog.dismiss();
 
-                                AlertPost alertPost = new AlertPost(pos, stt, date, storageRef2nd.getDownloadUrl().toString());
+                                Notification notification = new Notification(pos, stt, date, storageRef2nd.getDownloadUrl().toString());
 
                                 String postID = dbRef.push().getKey();
-                                dbRef.child(postID).setValue(alertPost);
+                                dbRef.child(postID).setValue(notification);
 
                                 Toast.makeText(getContext(), "Đã đăng cảnh báo!", Toast.LENGTH_SHORT).show();
 
-                                AlertFragment alertFragment = new AlertFragment();
-                                setFragment(alertFragment);
+                                NotificationsFragment notificationsFragment = new NotificationsFragment();
+                                setFragment(notificationsFragment);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -241,7 +241,7 @@ public class AlertSubmitFragment extends Fragment {
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.replace(R.id.main_frame, fragment);
+        fragmentTransaction.replace(R.id.frame_container, fragment);
         fragmentTransaction.commit();
     }
 

@@ -3,7 +3,7 @@ package com.qteam.saigonjams.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class CarPost {
+public class Sharing {
 
     private String userName;
     private String phoneNumber;
@@ -12,10 +12,10 @@ public class CarPost {
     private String vehicleType;
     private String date;
 
-    public CarPost() {
+    public Sharing() {
     }
 
-    public CarPost(String userName, String phoneNumber, String startPosition, String endPosition, String vehicleType, String date) {
+    public Sharing(String userName, String phoneNumber, String startPosition, String endPosition, String vehicleType, String date) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.startPosition = startPosition;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AlertSubmitFragment"
+    tools:context=".fragment.AddNotificationsFragment"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -26,7 +26,7 @@
         android:layout_marginBottom="10dp"/>
 
     <EditText
-        android:id="@+id/edtPosition"
+        android:id="@+id/et_position"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Vị trí kẹt xe"
@@ -44,11 +44,11 @@
         android:layout_marginBottom="10dp"/>
 
     <Spinner
-        android:id="@+id/spnStatus"
+        android:id="@+id/spn_status"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/layout_bg_spinner"/>
+        android:background="@drawable/bg_spinner"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,22 +57,22 @@
         android:padding="15dp"
         android:gravity="center_horizontal">
         <Button
-            android:id="@+id/btnAddImg"
+            android:id="@+id/btn_add_image"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/layout_bg_button"
+            android:background="@drawable/bg_button"
             android:text="Thêm ảnh"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
             android:elevation="5dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginEnd="30dp"/>
         <Button
-            android:id="@+id/btnSubmit1"
+            android:id="@+id/btn_post_notification"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/layout_bg_button"
+            android:background="@drawable/bg_button"
             android:text="Đăng"
             android:textSize="16sp"
             android:textColor="@color/colorWhite"
@@ -80,7 +80,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imgView"
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_no_image"/>

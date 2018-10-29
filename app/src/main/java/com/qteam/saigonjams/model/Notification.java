@@ -1,15 +1,15 @@
 package com.qteam.saigonjams.model;
 
-public class AlertPost {
+public class Notification {
     private String position;
     private String status;
     private String date;
     private String imageURL;
 
-    public AlertPost() {
+    public Notification() {
     }
 
-    public AlertPost(String position, String status, String date, String imageURL) {
+    public Notification(String position, String status, String date, String imageURL) {
         this.position = position;
         this.status = status;
         this.date = date;
