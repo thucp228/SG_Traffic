@@ -32,8 +32,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.qteam.saigonjams.R;
+import com.qteam.saigonjams.activity.MainActivity;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private static final int LOCATION_PERMISSION_REQUEST = 1;
     private static final int LOCATION_REQUEST = 2;
@@ -46,8 +49,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+         if (MainActivity.mainNav.getVisibility() != View.VISIBLE)
+             MainActivity.mainNav.setVisibility(View.VISIBLE);
 
          MapView mapView = view.findViewById(R.id.mapView);
          if (mapView != null) {

@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Thông báo đi nhờ xe"
+        android:text="Chia sẻ phương tiện"
         android:textSize="24sp"
         android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loại xe"
+        android:text="Loại phương tiện"
         android:textSize="16sp"
         android:textColor="@color/colorAccent"
         android:layout_marginBottom="10dp"/>
@@ -76,7 +76,6 @@
         android:id="@+id/spn_transport"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/bg_spinner"/>
     
     <Button
@@ -84,10 +83,11 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
         android:background="@drawable/bg_button"
         android:text="Đăng"
-        android:textSize="16sp"
+        android:textSize="17sp"
         android:textColor="@color/colorWhite"
-        android:elevation="5dp"/>
+        android:elevation="8dp" />
 
 </LinearLayout>

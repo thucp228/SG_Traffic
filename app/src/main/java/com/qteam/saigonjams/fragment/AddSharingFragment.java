@@ -1,6 +1,7 @@
 package com.qteam.saigonjams.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.qteam.saigonjams.activity.MainActivity;
 import com.qteam.saigonjams.model.Sharing;
 import com.qteam.saigonjams.R;
 
@@ -36,8 +38,10 @@ public class AddSharingFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sharing_add, container, false);
+
+        MainActivity.mainNav.setVisibility(View.GONE);
 
         name = view.findViewById(R.id.et_name);
         phone = view.findViewById(R.id.et_phone_number);
@@ -86,22 +90,17 @@ public class AddSharingFragment extends Fragment {
             Toast.makeText(getContext(), "Đã đăng thông báo!", Toast.LENGTH_SHORT).show();
 
             SharingFragment sharingFragment = new SharingFragment();
-            setFragment(sharingFragment);
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .replace(R.id.main_container, sharingFragment)
+                    .commit();
         }
     }
 
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
-        String currentTime = dateFormat.format(calendar.getTime());
-        return currentTime;
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.replace(R.id.frame_container, fragment);
-        fragmentTransaction.commit();
+        return dateFormat.format(calendar.getTime());
     }
 
 }

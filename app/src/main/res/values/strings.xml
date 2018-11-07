@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TTKX TpHCM</string>
     <string name="nav_notifications">Thông báo</string>
-    <string name="nav_car">Đi nhờ</string>
+    <string name="nav_sharing">Chia sẻ</string>
     <string name="nav_map">Bản đồ</string>
     <string name="nav_settings">Cài đặt</string>
     <string name="about_description">Ứng dụng thông tin kẹt xe trên địa bàn Tp.HCM</string>

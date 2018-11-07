@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_notifications"
         android:title="@string/nav_notifications" />
     <item
-        android:id="@+id/nav_car"
-        android:icon="@drawable/ic_car"
-        android:title="@string/nav_car"/>
+        android:id="@+id/nav_sharing"
+        android:icon="@drawable/ic_sharing"
+        android:title="@string/nav_sharing"/>
     <item
         android:id="@+id/nav_map"
         android:icon="@drawable/ic_map"

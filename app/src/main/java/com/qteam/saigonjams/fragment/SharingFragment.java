@@ -2,6 +2,7 @@ package com.qteam.saigonjams.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.qteam.saigonjams.activity.MainActivity;
 import com.qteam.saigonjams.model.Sharing;
 import com.qteam.saigonjams.R;
 import com.qteam.saigonjams.adapter.SharingRecyclerViewAdapter;
@@ -42,8 +44,12 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sharing, container, false);
+
+        if (MainActivity.mainNav.getVisibility() != View.VISIBLE)
+            MainActivity.mainNav.setVisibility(View.VISIBLE);
+
         fabAdd = view.findViewById(R.id.fab_add_sharing);
         fabAdd.setOnClickListener(this);
         recyclerView = view.findViewById(R.id.rcv_sharing_list);
@@ -57,7 +63,7 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postList = new ArrayList<>();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Sharing sharing = postSnapshot.getValue(Sharing.class);
@@ -74,7 +80,7 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("ReadData", "Failed to read data");
                 progressDialog.dismiss();
             }
@@ -86,15 +92,10 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         AddSharingFragment addSharingFragment = new AddSharingFragment();
-        setFragment(addSharingFragment);
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.frame_container, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.fade_in, android.R.anim.fade_out)
+                .replace(R.id.main_container, addSharingFragment)
+                .addToBackStack(null).commit();
     }
 
 }

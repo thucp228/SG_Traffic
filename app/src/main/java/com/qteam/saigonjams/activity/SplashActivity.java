@@ -10,15 +10,13 @@ import com.qteam.saigonjams.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private ProgressBar progressBar;
+    public static final int TIME_DELAY = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash);
-
-        progressBar = findViewById(R.id.progressBar);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -27,6 +25,6 @@ public class SplashActivity extends AppCompatActivity {
                 SplashActivity.this.startActivity(intent);
                 SplashActivity.this.finish();
             }
-        }, 2000);
+        }, TIME_DELAY);
     }
 }

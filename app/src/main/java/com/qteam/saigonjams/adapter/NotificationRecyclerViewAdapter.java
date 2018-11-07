@@ -27,8 +27,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
     public @NonNull RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_notifications, viewGroup, false);
 
-        RecyclerViewHolder holder = new RecyclerViewHolder(view);
-        return holder;
+        return new RecyclerViewHolder(view);
     }
 
     @Override
@@ -69,7 +68,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
         TextView tvPosition, tvStatus, tvDate;
         ImageView imageView;
 
-        public RecyclerViewHolder(View itemView) {
+        private RecyclerViewHolder(View itemView) {
             super(itemView);
 
             tvPosition = itemView.findViewById(R.id.tv_location);

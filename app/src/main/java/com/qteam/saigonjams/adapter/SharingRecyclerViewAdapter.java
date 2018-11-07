@@ -24,8 +24,7 @@ public class SharingRecyclerViewAdapter extends RecyclerView.Adapter<SharingRecy
     public @NonNull RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_sharing, viewGroup, false);
 
-        RecyclerViewHolder holder = new RecyclerViewHolder(view);
-        return holder;
+        return new RecyclerViewHolder(view);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class SharingRecyclerViewAdapter extends RecyclerView.Adapter<SharingRecy
     class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvPhone, tvStartPos, tvEndPos, tvVehicleType, tvDate;
 
-        public RecyclerViewHolder(View itemView) {
+        private RecyclerViewHolder(View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tv_name);

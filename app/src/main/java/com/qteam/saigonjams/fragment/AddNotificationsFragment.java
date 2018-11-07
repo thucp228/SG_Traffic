@@ -36,6 +36,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.qteam.saigonjams.R;
+import com.qteam.saigonjams.activity.MainActivity;
 import com.qteam.saigonjams.model.Notification;
 
 import java.text.SimpleDateFormat;
@@ -52,7 +53,7 @@ public class AddNotificationsFragment extends Fragment {
     private static final int GALLERY = 1, CAMERA = 2;
     private EditText position;
     private Spinner status;
-    private Button buttonAddImg, buttonPost;
+    private Button buttonPost;
     private ImageView imageView;
     private Uri fileURI;
     private ProgressDialog progressDialog;
@@ -71,19 +72,18 @@ public class AddNotificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notifications_add, container, false);
 
+        MainActivity.mainNav.setVisibility(View.GONE);
+
         position = view.findViewById(R.id.et_position);
         status = view.findViewById(R.id.spn_status);
         imageView = view.findViewById(R.id.image_view);
-        progressDialog = new ProgressDialog(getContext());
-
-        buttonAddImg = view.findViewById(R.id.btn_add_image);
-        buttonAddImg.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkPermissions();
             }
         });
-
+        progressDialog = new ProgressDialog(getContext());
         buttonPost = view.findViewById(R.id.btn_post_notification);
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,8 +179,7 @@ public class AddNotificationsFragment extends Fragment {
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
-        String currentTime = dateFormat.format(calendar.getTime());
-        return currentTime;
+        return dateFormat.format(calendar.getTime());
     }
 
     private String getFileExtension(Uri uri) {
@@ -216,7 +215,10 @@ public class AddNotificationsFragment extends Fragment {
                                 Toast.makeText(getContext(), "Đã đăng cảnh báo!", Toast.LENGTH_SHORT).show();
 
                                 NotificationsFragment notificationsFragment = new NotificationsFragment();
-                                setFragment(notificationsFragment);
+                                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                                        .replace(R.id.main_container, notificationsFragment)
+                                        .commit();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -236,13 +238,6 @@ public class AddNotificationsFragment extends Fragment {
         }
         else
             Toast.makeText(getContext(), "Vui lòng chọn ảnh!", Toast.LENGTH_SHORT).show();
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        fragmentTransaction.replace(R.id.frame_container, fragment);
-        fragmentTransaction.commit();
     }
 
 }
