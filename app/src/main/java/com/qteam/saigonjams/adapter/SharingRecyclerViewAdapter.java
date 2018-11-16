@@ -16,6 +16,21 @@ public class SharingRecyclerViewAdapter extends RecyclerView.Adapter<SharingRecy
 
     private List<Sharing> sharingList;
 
+    class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName, tvPhone, tvStartPos, tvEndPos, tvVehicleType, tvDate;
+
+        private RecyclerViewHolder(View itemView) {
+            super(itemView);
+
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvPhone = itemView.findViewById(R.id.tv_phone_number);
+            tvStartPos = itemView.findViewById(R.id.tv_start_position);
+            tvEndPos = itemView.findViewById(R.id.tv_end_position);
+            tvVehicleType = itemView.findViewById(R.id.tv_transport);
+            tvDate = itemView.findViewById(R.id.tv_shared_time);
+        }
+    }
+
     public SharingRecyclerViewAdapter(List<Sharing> list) {
         this.sharingList = list;
     }
@@ -43,18 +58,8 @@ public class SharingRecyclerViewAdapter extends RecyclerView.Adapter<SharingRecy
         return sharingList.size();
     }
 
-    class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPhone, tvStartPos, tvEndPos, tvVehicleType, tvDate;
-
-        private RecyclerViewHolder(View itemView) {
-            super(itemView);
-
-            tvName = itemView.findViewById(R.id.tv_name);
-            tvPhone = itemView.findViewById(R.id.tv_phone_number);
-            tvStartPos = itemView.findViewById(R.id.tv_start_position);
-            tvEndPos = itemView.findViewById(R.id.tv_end_position);
-            tvVehicleType = itemView.findViewById(R.id.tv_transport);
-            tvDate = itemView.findViewById(R.id.tv_shared_time);
-        }
+    public void filterList(List<Sharing> filteredList) {
+        sharingList = filteredList;
+        notifyDataSetChanged();
     }
 }

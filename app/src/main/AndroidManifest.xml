@@ -21,7 +21,8 @@
             android:value="AIzaSyAgxUKOOceax2CXOZn-KHbcHR4VaID86gk"/>
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"

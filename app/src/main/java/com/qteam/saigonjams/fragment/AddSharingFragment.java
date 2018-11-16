@@ -25,13 +25,17 @@ import java.util.Locale;
 
 public class AddSharingFragment extends Fragment {
 
-    private static final String DATABASE_PATH = "Car_Posts";
+    private static final String DATABASE_PATH = "sharing";
+    private static final String TIME_FORMAT = "dd-MM-YYYY h:mm a";
+    private static final String TRANSPORT_1 = "Xe máy";
+    private static final String TRANSPORT_2 = "Xe ô-tô";
+    private static final String SUCCESS_MESSAGE = "Đã chia sẻ!";
+    private static final String INFO_REQUEST_MESSAGE = "Vui lòng nhập đầy đủ thông tin!";
 
-    private FirebaseDatabase fbDB;
-    private DatabaseReference dbRef;
     private EditText name, phone, startPos, endPos;
     private Spinner vehicleType;
-    private Button buttonPost;
+
+    private DatabaseReference dbRef;
 
     public AddSharingFragment() {
         // Required empty public constructor
@@ -48,19 +52,19 @@ public class AddSharingFragment extends Fragment {
         startPos = view.findViewById(R.id.et_start_position);
         endPos = view.findViewById(R.id.et_end_position);
         vehicleType = view.findViewById(R.id.spn_transport);
-        buttonPost = view.findViewById(R.id.btn_post_sharing);
 
+        Button buttonPost = view.findViewById(R.id.btn_post_sharing);
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postCar();
+                postSharing();
             }
         });
 
-        fbDB = FirebaseDatabase.getInstance();
+        FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
         dbRef = fbDB.getReference(DATABASE_PATH);
 
-        String[] type = {"Xe máy", "Xe ô-tô"};
+        String[] type = {TRANSPORT_1, TRANSPORT_2};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, type);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         vehicleType.setAdapter(adapter);
@@ -68,12 +72,12 @@ public class AddSharingFragment extends Fragment {
         return view;
     }
 
-    private void postCar() {
+    private void postSharing() {
         if ((name.getText().toString().trim().equals(""))
                 || (phone.getText().toString().trim().equals(""))
                 || (startPos.getText().toString().trim().equals(""))
                 || (endPos.getText().toString().equals("")))
-            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), INFO_REQUEST_MESSAGE, Toast.LENGTH_SHORT).show();
         else {
             String userName = name.getText().toString().trim();
             String phoneNumber = phone.getText().toString().trim();
@@ -87,20 +91,24 @@ public class AddSharingFragment extends Fragment {
             String postID = dbRef.push().getKey();
             dbRef.child(postID).setValue(sharing);
 
-            Toast.makeText(getContext(), "Đã đăng thông báo!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
 
             SharingFragment sharingFragment = new SharingFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.main_container, sharingFragment)
-                    .commit();
+            setFragment(sharingFragment);
         }
     }
 
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
         return dateFormat.format(calendar.getTime());
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.commit();
     }
 
 }

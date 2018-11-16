@@ -12,8 +12,7 @@ public class Sharing {
     private String vehicleType;
     private String date;
 
-    public Sharing() {
-    }
+    public Sharing() { }
 
     public Sharing(String userName, String phoneNumber, String startPosition, String endPosition, String vehicleType, String date) {
         this.userName = userName;

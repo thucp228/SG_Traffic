@@ -175,11 +175,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-    }
+    public void onConnectionSuspended(int i) { }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    }
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { }
 
 }

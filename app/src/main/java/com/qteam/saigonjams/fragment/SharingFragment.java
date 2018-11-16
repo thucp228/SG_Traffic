@@ -3,16 +3,19 @@ package com.qteam.saigonjams.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,13 +33,12 @@ import java.util.List;
 
 public class SharingFragment extends Fragment implements View.OnClickListener {
 
-    private static final String DATABASE_PATH = "Car_Posts";
+    private static final String DATABASE_PATH = "sharing";
+    private static final String LOADING_MESSAGE = "Đang tải...";
 
-    private FloatingActionButton fabAdd;
-    private FirebaseDatabase fbDatabase;
-    private DatabaseReference dbRef;
     private RecyclerView recyclerView;
-    private List<Sharing> postList;
+    private SharingRecyclerViewAdapter recyclerViewAdapter;
+    private List<Sharing> sharingList;
     private ProgressDialog progressDialog;
 
     public SharingFragment() {
@@ -50,32 +52,54 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
         if (MainActivity.mainNav.getVisibility() != View.VISIBLE)
             MainActivity.mainNav.setVisibility(View.VISIBLE);
 
-        fabAdd = view.findViewById(R.id.fab_add_sharing);
-        fabAdd.setOnClickListener(this);
+        ImageButton btnAdd = view.findViewById(R.id.btn_add_sharing);
+        btnAdd.setOnClickListener(this);
+
         recyclerView = view.findViewById(R.id.rcv_sharing_list);
+        recyclerView.setHasFixedSize(true);
+
+        EditText searchBox = view.findViewById(R.id.search_box);
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
 
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Đang tải...");
+        progressDialog.setMessage(LOADING_MESSAGE);
         progressDialog.show();
 
-        fbDatabase = FirebaseDatabase.getInstance();
-        dbRef = fbDatabase.getReference(DATABASE_PATH);
+        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = fbDatabase.getReference(DATABASE_PATH);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList = new ArrayList<>();
+                sharingList = new ArrayList<>();
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Sharing sharing = postSnapshot.getValue(Sharing.class);
-                    postList.add(sharing);
+                    sharingList.add(sharing);
                 }
-                Collections.reverse(postList);
-                SharingRecyclerViewAdapter adapter = new SharingRecyclerViewAdapter(postList);
+
+                Collections.reverse(sharingList);
+
+                recyclerViewAdapter = new SharingRecyclerViewAdapter(sharingList);
+
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                 linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
                 recyclerView.setLayoutManager(linearLayoutManager);
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
+                recyclerView.setAdapter(recyclerViewAdapter);
+
                 progressDialog.dismiss();
             }
 
@@ -92,10 +116,28 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         AddSharingFragment addSharingFragment = new AddSharingFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.fade_in, android.R.anim.fade_out)
-                .replace(R.id.main_container, addSharingFragment)
-                .addToBackStack(null).commit();
+        setFragment(addSharingFragment);
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void filter(String searchText) {
+        List<Sharing> filteredList = new ArrayList<>();
+
+        for (Sharing item : sharingList) {
+            if (item.getStartPosition().toLowerCase().contains(searchText.toLowerCase())
+                    || item.getEndPosition().toLowerCase().contains(searchText.toLowerCase())
+                    || item.getVehicleType().toLowerCase().contains(searchText.toLowerCase()))
+                filteredList.add(item);
+        }
+
+        recyclerViewAdapter.filterList(filteredList);
     }
 
 }

@@ -6,8 +6,7 @@ public class Notification {
     private String date;
     private String imageURL;
 
-    public Notification() {
-    }
+    public Notification() { }
 
     public Notification(String position, String status, String date, String imageURL) {
         this.position = position;

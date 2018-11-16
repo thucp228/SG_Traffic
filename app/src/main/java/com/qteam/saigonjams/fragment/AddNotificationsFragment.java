@@ -45,21 +45,34 @@ import java.util.Locale;
 
 public class AddNotificationsFragment extends Fragment {
 
-    private static final String IMAGE_DIRECTORY = "/TTKXHCM";
-    private static final String DATABASE_PATH = "Alert_Posts";
-    private static final String STORAGE_PATH = "All_Images/";
-    private static final int PERMISSIONS_REQUEST = 3;
+    private static final String DATABASE_PATH = "notifications";
+    private static final String STORAGE_PATH = "images/";
+    private static final String STATUS_1 = "Thông thoáng";
+    private static final String STATUS_2 = "Đông xe";
+    private static final String STATUS_3 = "Ùn tắc";
+    private static final String STATUS_4 = "Ngập nước";
+    private static final String STATUS_5 = "Tai nạn";
+    private static final String TIME_FORMAT = "dd-MM-YYYY h:mm a";
+    private static final String LOADING_MESSAGE = "Đang tải ảnh lên...";
+    private static final String FROM_GALLERY = "Chọn ảnh từ điện thoại";
+    private static final String FROM_CAMERA = "Chụp ảnh từ camera";
+    private static final String ADD_PHOTO_MESSAGE = "Thêm ảnh";
+    private static final String ADD_PHOTO_SUCCESS_MESSAGE = "Đã chọn ảnh!";
+    private static final String LOCATION_REQUEST_MESSAGE = "Vui lòng nhập vị trí!";
+    private static final String POST_SUCCESS_MESSAGE = "Đã đăng thông báo!";
+    private static final String MEDIA_TYPE = "image/*";
+    private static final String ERROR_MESSAGE = "Lỗi: ";
+    private static final String PHOTO_REQUEST_MESSAGE = "Vui lòng chọn ảnh!";
 
+    private static final int PERMISSIONS_REQUEST = 3;
     private static final int GALLERY = 1, CAMERA = 2;
+
     private EditText position;
     private Spinner status;
-    private Button buttonPost;
     private ImageView imageView;
     private Uri fileURI;
     private ProgressDialog progressDialog;
 
-    private FirebaseDatabase fbDB;
-    private FirebaseStorage fbStorage;
     private DatabaseReference dbRef;
     private StorageReference storageRef;
 
@@ -84,20 +97,21 @@ public class AddNotificationsFragment extends Fragment {
             }
         });
         progressDialog = new ProgressDialog(getContext());
-        buttonPost = view.findViewById(R.id.btn_post_notification);
+
+        Button buttonPost = view.findViewById(R.id.btn_post_notification);
         buttonPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postAlert();
+                postNotification();
             }
         });
 
-        fbDB = FirebaseDatabase.getInstance();
+        FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
         dbRef = fbDB.getReference(DATABASE_PATH);
-        fbStorage = FirebaseStorage.getInstance();
+        FirebaseStorage fbStorage = FirebaseStorage.getInstance();
         storageRef = fbStorage.getReference();
 
-        String[] status = {"Thông thoáng", "Đông xe", "Ùn tắc", "Ngập nước", "Tai nạn"};
+        String[] status = {STATUS_1, STATUS_2, STATUS_3, STATUS_4, STATUS_5};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, status);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         this.status.setAdapter(adapter);
@@ -123,9 +137,9 @@ public class AddNotificationsFragment extends Fragment {
     }
 
     private void showAddImageDialog() {
-        String[] options = {"Chọn ảnh từ điện thoại", "Chụp ảnh từ camera"};
+        String[] options = {FROM_GALLERY, FROM_CAMERA};
         AlertDialog.Builder photoDialog = new AlertDialog.Builder(getActivity());
-        photoDialog.setTitle("Thêm ảnh");
+        photoDialog.setTitle(ADD_PHOTO_MESSAGE);
         photoDialog.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -144,7 +158,7 @@ public class AddNotificationsFragment extends Fragment {
 
     private void selectImageFromGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-        galleryIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
+        galleryIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MEDIA_TYPE);
         startActivityForResult(galleryIntent, GALLERY);
     }
 
@@ -164,21 +178,21 @@ public class AddNotificationsFragment extends Fragment {
                 if (data != null) {
                     fileURI = data.getData();
                     imageView.setImageURI(fileURI);
-                    Toast.makeText(getContext(), "Đã chọn ảnh!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), ADD_PHOTO_SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
                 }
             }
             else if (requestCode == CAMERA) {
                 Bundle extras = data.getExtras();
                 Bitmap thumbnail = (Bitmap) extras.get("data");
                 imageView.setImageBitmap(thumbnail);
-                Toast.makeText(getContext(), "Đã chọn ảnh!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), ADD_PHOTO_SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     public String getCurrentTime() {
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY h:mm a", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
         return dateFormat.format(calendar.getTime());
     }
 
@@ -188,56 +202,65 @@ public class AddNotificationsFragment extends Fragment {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    private void postAlert() {
+    private void postNotification() {
         if (fileURI != null) {
             if (position.getText().toString().equals("")) {
-                Toast.makeText(getContext(), "Vui lòng nhập vị trí!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), LOCATION_REQUEST_MESSAGE, Toast.LENGTH_SHORT).show();
             }
             else {
-                progressDialog.setMessage("Đang tải ảnh lên...");
+                progressDialog.setMessage(LOADING_MESSAGE);
                 progressDialog.show();
 
-                final StorageReference storageRef2nd = storageRef.child(STORAGE_PATH + System.currentTimeMillis() + "." + getFileExtension(fileURI));
-                storageRef2nd.putFile(fileURI)
+                final StorageReference storageRef2 = storageRef.child(STORAGE_PATH + System.currentTimeMillis() + "." + getFileExtension(fileURI));
+                storageRef2.putFile(fileURI)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                String pos = position.getText().toString().trim();
-                                String stt = status.getSelectedItem().toString();
-                                String date = getCurrentTime();
-                                progressDialog.dismiss();
+                                storageRef2.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        String pos = position.getText().toString().trim();
+                                        String stt = status.getSelectedItem().toString();
+                                        String date = getCurrentTime();
 
-                                Notification notification = new Notification(pos, stt, date, storageRef2nd.getDownloadUrl().toString());
+                                        Notification notification = new Notification(pos, stt, date, uri.toString());
 
-                                String postID = dbRef.push().getKey();
-                                dbRef.child(postID).setValue(notification);
+                                        String postID = dbRef.push().getKey();
+                                        dbRef.child(postID).setValue(notification);
 
-                                Toast.makeText(getContext(), "Đã đăng cảnh báo!", Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
 
-                                NotificationsFragment notificationsFragment = new NotificationsFragment();
-                                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                                        .replace(R.id.main_container, notificationsFragment)
-                                        .commit();
+                                        Toast.makeText(getContext(), POST_SUCCESS_MESSAGE, Toast.LENGTH_SHORT).show();
+
+                                        NotificationsFragment notificationsFragment = new NotificationsFragment();
+                                        setFragment(notificationsFragment);
+                                    }
+                                });
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressDialog.dismiss();
-                                Toast.makeText(getContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), ERROR_MESSAGE + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                progressDialog.setMessage("Đang tải ảnh lên...");
+                                progressDialog.setMessage(LOADING_MESSAGE);
                             }
                         });
             }
         }
         else
-            Toast.makeText(getContext(), "Vui lòng chọn ảnh!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), PHOTO_REQUEST_MESSAGE, Toast.LENGTH_SHORT).show();
     }
 
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.main_container, fragment);
+        fragmentTransaction.commit();
+    }
 }

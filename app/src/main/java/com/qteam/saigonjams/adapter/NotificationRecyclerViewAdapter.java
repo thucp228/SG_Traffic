@@ -17,7 +17,27 @@ import java.util.List;
 
 public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<NotificationRecyclerViewAdapter.RecyclerViewHolder> {
 
+    private static final String STATUS_1 = "Thông thoáng";
+    private static final String STATUS_2 = "Đông xe";
+    private static final String STATUS_3 = "Ùn tắc";
+    private static final String STATUS_4 = "Ngập nước";
+    private static final String STATUS_5 = "Tai nạn";
+
     private List<Notification> notificationList;
+
+    class RecyclerViewHolder extends RecyclerView.ViewHolder {
+        TextView tvPosition, tvStatus, tvDate;
+        ImageView imageView;
+
+        private RecyclerViewHolder(View itemView) {
+            super(itemView);
+
+            tvPosition = itemView.findViewById(R.id.tv_location);
+            tvStatus = itemView.findViewById(R.id.tv_status);
+            tvDate = itemView.findViewById(R.id.tv_posted_time);
+            imageView = itemView.findViewById(R.id.image_view_notification);
+        }
+    }
 
     public NotificationRecyclerViewAdapter(List<Notification> notificationList) {
         this.notificationList = notificationList;
@@ -39,19 +59,19 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
         holder.tvDate.setText(post.getDate());
 
         switch (post.getStatus()) {
-            case "Thông thoáng":
+            case STATUS_1:
                 holder.tvStatus.setTextColor(Color.parseColor("#32CD32"));
                 break;
-            case "Đông xe":
+            case STATUS_2:
                 holder.tvStatus.setTextColor(Color.parseColor("#FFA500"));
                 break;
-            case "Ùn tắc":
+            case STATUS_3:
                 holder.tvStatus.setTextColor(Color.parseColor("#FF4500"));
                 break;
-            case "Ngập nước":
+            case STATUS_4:
                 holder.tvStatus.setTextColor(Color.parseColor("#8B4513"));
                 break;
-            case "Tai nạn":
+            case STATUS_5:
                 holder.tvStatus.setTextColor(Color.parseColor("#FF0000"));
                 break;
         }
@@ -64,17 +84,9 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
         return notificationList.size();
     }
 
-    class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPosition, tvStatus, tvDate;
-        ImageView imageView;
-
-        private RecyclerViewHolder(View itemView) {
-            super(itemView);
-
-            tvPosition = itemView.findViewById(R.id.tv_location);
-            tvStatus = itemView.findViewById(R.id.tv_status);
-            tvDate = itemView.findViewById(R.id.tv_posted_time);
-            imageView = itemView.findViewById(R.id.image_view_notification);
-        }
+    public void filterList(List<Notification> filteredList) {
+        notificationList = filteredList;
+        notifyDataSetChanged();
     }
+
 }

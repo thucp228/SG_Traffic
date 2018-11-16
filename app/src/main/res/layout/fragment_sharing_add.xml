@@ -26,7 +26,7 @@
 
     <EditText
         android:id="@+id/et_name"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên"
         android:textSize="16sp"
@@ -36,7 +36,7 @@
 
     <EditText
         android:id="@+id/et_phone_number"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Số điện thoại"
         android:textSize="16sp"
@@ -46,7 +46,7 @@
 
     <EditText
         android:id="@+id/et_start_position"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vị trí bắt đầu đi"
         android:textSize="16sp"
@@ -56,7 +56,7 @@
 
     <EditText
         android:id="@+id/et_end_position"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vị trí đích"
         android:textSize="16sp"
@@ -75,7 +75,7 @@
     <Spinner
         android:id="@+id/spn_transport"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:background="@drawable/bg_spinner"/>
     
     <Button
@@ -83,7 +83,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/bg_button"
         android:text="Đăng"
         android:textSize="17sp"
