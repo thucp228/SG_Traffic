@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.qteam.saigonjams.fragment.MapFragment;
 import com.qteam.saigonjams.fragment.NotificationsFragment;
 import com.qteam.saigonjams.fragment.SettingsFragment;
@@ -26,35 +27,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setFragment(notificationsFragment);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("notifications");
+
         mainNav = findViewById(R.id.navigation_bar);
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_notifications:
-                        fragment = new NotificationsFragment();
-                        setFragment(fragment);
+                        if (!item.isChecked()) {
+                            fragment = new NotificationsFragment();
+                            setFragment(fragment);
+                        }
                         return true;
 
                     case R.id.nav_sharing:
-                        fragment = new SharingFragment();
-                        setFragment(fragment);
+                        if (!item.isChecked()) {
+                            fragment = new SharingFragment();
+                            setFragment(fragment);
+                        }
                         return true;
 
                     case R.id.nav_map:
-                        fragment = new MapFragment();
-                        setFragment(fragment);
+                        if (!item.isChecked()) {
+                            fragment = new MapFragment();
+                            setFragment(fragment);
+                        }
                         return true;
 
                     case R.id.nav_settings:
-                        fragment = new SettingsFragment();
-                        setFragment(fragment);
+                        if (!item.isChecked()) {
+                            fragment = new SettingsFragment();
+                            setFragment(fragment);
+                        }
                         return true;
                 }
                 return false;
             }
         });
-
     }
 
     private void setFragment(Fragment fragment) {

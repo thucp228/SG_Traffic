@@ -4,10 +4,13 @@
     <string name="nav_sharing">Chia sẻ</string>
     <string name="nav_map">Bản đồ</string>
     <string name="nav_settings">Cài đặt</string>
-    <string name="about_description">Ứng dụng thông tin giao thông TP.HCM</string>
-    <string name="about_version">Phiên bản 1.0</string>
-    <string name="about_dev">Phát triển:</string>
-    <string name="about_contact">Liên hệ:</string>
+    <string name="app_description">Ứng dụng thông tin giao thông TP.HCM</string>
+    <string name="app_version">Phiên bản 2.0</string>
+    <string name="app_development">Phát triển</string>
+    <string name="app_contact">Liên hệ</string>
     <string name="search_box_hint">Tìm kiếm</string>
-
+    <string name="app_info">Thông tin ứng dụng</string>
+    <string name="app_developer">QTEAM</string>
+    <string name="app_developer_mail1">thucp228@gmail.com</string>
+    <string name="app_developer_mail2">nguyenlequang1996@gmail.com</string>
 </resources>

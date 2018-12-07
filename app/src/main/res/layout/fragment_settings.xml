@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:padding="20dp"
     tools:context=".fragment.SettingsFragment">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_foreground"/>
-
+        android:text="@string/app_info"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorGrayDark"
+        android:layout_marginBottom="5dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="16sp"
-        android:textStyle="bold"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_description"
+        android:text="@string/app_description"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="5dp"/>
@@ -32,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_version"
+        android:text="@string/app_version"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="10dp"/>
@@ -40,15 +43,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_dev"
+        android:text="@string/app_development"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorGrayDark"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="QTEAM"
+        android:text="@string/app_developer"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
         android:layout_marginBottom="10dp"/>
@@ -56,24 +61,34 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_contact"
+        android:text="@string/app_contact"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorGrayDark"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="thucp228@gmail.com"
-        android:textSize="16sp"
-        android:textColor="@color/colorBlack" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="nguyenlequang1996@gmail.com"
+        android:text="@string/app_developer_mail1"
         android:textSize="16sp"
         android:textColor="@color/colorBlack"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_developer_mail2"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_foreground"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        tools:ignore="contentDescription"/>
 
 </LinearLayout>
