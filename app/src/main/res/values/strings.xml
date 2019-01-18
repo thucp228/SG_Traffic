@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">SaiGon Traffic</string>
+    <string name="app_name">Traffeed</string>
     <string name="nav_notifications">Thông báo</string>
     <string name="nav_sharing">Chia sẻ</string>
     <string name="nav_map">Bản đồ</string>
     <string name="nav_settings">Cài đặt</string>
-    <string name="app_description">Ứng dụng thông tin giao thông TP.HCM</string>
+    <string name="app_description">Ứng dụng thông tin giao thông</string>
     <string name="app_version">Phiên bản 2.0</string>
     <string name="app_development">Phát triển</string>
     <string name="app_contact">Liên hệ</string>
@@ -13,4 +13,5 @@
     <string name="app_developer">QTEAM</string>
     <string name="app_developer_mail1">thucp228@gmail.com</string>
     <string name="app_developer_mail2">nguyenlequang1996@gmail.com</string>
+    <string name="google_maps_api_key">AIzaSyAgxUKOOceax2CXOZn-KHbcHR4VaID86gk</string>
 </resources>

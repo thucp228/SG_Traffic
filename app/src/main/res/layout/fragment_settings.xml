@@ -8,6 +8,14 @@
     android:padding="20dp"
     tools:context=".fragment.SettingsFragment">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_foreground"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        tools:ignore="contentDescription"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,12 +91,6 @@
         android:textSize="16sp"
         android:textColor="@color/colorBlack" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_foreground"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        tools:ignore="contentDescription"/>
+
 
 </LinearLayout>

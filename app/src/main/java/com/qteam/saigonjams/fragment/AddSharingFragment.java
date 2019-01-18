@@ -26,7 +26,7 @@ import java.util.Locale;
 public class AddSharingFragment extends Fragment {
 
     private static final String DATABASE_PATH = "sharing";
-    private static final String TIME_FORMAT = "dd-MM-YYYY h:mm a";
+    private static final String TIME_FORMAT = "dd/MM/yyyy HH:mm";
     private static final String TRANSPORT_1 = "Xe máy";
     private static final String TRANSPORT_2 = "Xe ô-tô";
     private static final String SUCCESS_MESSAGE = "Đã chia sẻ!";

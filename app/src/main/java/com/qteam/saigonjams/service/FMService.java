@@ -20,12 +20,10 @@ public class FMService extends FirebaseMessagingService {
         String title = null;
         String message = null;
 
-        if (remoteMessage.getData().size() > 0) {
-            title =  remoteMessage.getData().get("position");
-            message = remoteMessage.getData().get("status");
+        if (remoteMessage.getNotification() != null) {
+            title =  remoteMessage.getNotification().getTitle();
+            message = remoteMessage.getNotification().getBody();
         }
-
-//        if (remoteMessage.getNotification() != null) {}
 
         showNotification(title, message);
     }

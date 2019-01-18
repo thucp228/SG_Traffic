@@ -8,7 +8,7 @@
     android:paddingRight="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
-    android:layout_margin="2dp"
+    android:layout_margin="3dp"
     android:background="@drawable/bg_item">
 
     <RelativeLayout
@@ -37,7 +37,7 @@
             android:layout_toEndOf="@id/avatar"
             android:layout_below="@id/tv_name"
             android:layout_gravity="end"
-            android:text="30-5-2018 4:00 PM"
+            android:text="30/05/2018 16:00"
             android:textSize="12sp"/>
     </RelativeLayout>
 
@@ -132,5 +132,20 @@
             android:textSize="16sp"
             android:textColor="@color/colorBlack"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_call"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_button"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:text="Gọi"
+        android:paddingStart="15dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="end"
+        android:drawablePadding="10dp"
+        android:drawableStart="@android:drawable/sym_call_outgoing"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

@@ -1,10 +1,15 @@
 package com.qteam.saigonjams.fragment;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,9 +37,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class SharingFragment extends Fragment implements View.OnClickListener {
-
+    public static final int PERMISSIONS_REQUEST = 1;
     private static final String DATABASE_PATH = "sharing";
     private static final String LOADING_MESSAGE = "Đang tải...";
+    private static final String INFO = "Nhấn giữ để gọi!";
 
     private RecyclerView recyclerView;
     private SharingRecyclerViewAdapter recyclerViewAdapter;
@@ -51,6 +57,8 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
 
         if (MainActivity.mainNav.getVisibility() != View.VISIBLE)
             MainActivity.mainNav.setVisibility(View.VISIBLE);
+
+        checkPermissions();
 
         ImageButton btnAdd = view.findViewById(R.id.btn_add_sharing);
         btnAdd.setOnClickListener(this);
@@ -74,6 +82,7 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(LOADING_MESSAGE);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
@@ -117,6 +126,26 @@ public class SharingFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         AddSharingFragment addSharingFragment = new AddSharingFragment();
         setFragment(addSharingFragment);
+    }
+
+    private boolean checkPermissions() {
+        String[] permissions = {Manifest.permission.CALL_PHONE};
+        if (ContextCompat.checkSelfPermission(getContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        else {
+            requestPermissions(permissions, PERMISSIONS_REQUEST);
+            return false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+        }
     }
 
     private void setFragment(Fragment fragment) {

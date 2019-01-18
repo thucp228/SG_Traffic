@@ -1,13 +1,18 @@
 package com.qteam.saigonjams.activity;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.support.v4.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.qteam.saigonjams.fragment.MapFragment;
 import com.qteam.saigonjams.fragment.NotificationsFragment;
@@ -18,6 +23,8 @@ import com.qteam.saigonjams.R;
 public class MainActivity extends AppCompatActivity {
 
     public static BottomNavigationView mainNav;
+    public static Context context;
+    public static LocationManager locationManager;
     private NotificationsFragment notificationsFragment = new NotificationsFragment();
     private Fragment fragment;
 
@@ -27,7 +34,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setFragment(notificationsFragment);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("notifications");
+        context = getApplicationContext();
+
+        FirebaseMessaging.getInstance().subscribeToTopic("notifications")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                String msg = "Succeed";
+                if (!task.isSuccessful())
+                    msg = "Failed";
+
+                Log.d("SUBSCRIBE", msg);
+            }
+        });
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         mainNav = findViewById(R.id.navigation_bar);
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

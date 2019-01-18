@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.qteam.saigonjams.model.Notification;
 import com.qteam.saigonjams.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class NotificationRecyclerViewAdapter extends RecyclerView.Adapter<Notifi
                 break;
         }
 
-        Glide.with(holder.imageView.getContext()).load(post.getImageURL()).into(holder.imageView);
+        Picasso.get().load(post.getImageURL()).into(holder.imageView);
     }
 
     @Override

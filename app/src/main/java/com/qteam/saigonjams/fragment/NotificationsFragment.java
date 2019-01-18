@@ -74,6 +74,7 @@ public class NotificationsFragment extends Fragment implements View.OnClickListe
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(LOADING_MESSAGE);
+        progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
 
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();

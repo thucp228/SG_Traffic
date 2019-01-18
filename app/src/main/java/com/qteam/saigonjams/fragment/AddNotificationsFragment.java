@@ -9,6 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,11 +45,13 @@ import com.qteam.saigonjams.R;
 import com.qteam.saigonjams.activity.MainActivity;
 import com.qteam.saigonjams.model.Notification;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
-public class AddNotificationsFragment extends Fragment {
+public class AddNotificationsFragment extends Fragment implements LocationListener {
 
     private static final String DATABASE_PATH = "notifications";
     private static final String STORAGE_PATH = "images/";
@@ -52,7 +60,7 @@ public class AddNotificationsFragment extends Fragment {
     private static final String STATUS_3 = "Ùn tắc";
     private static final String STATUS_4 = "Ngập nước";
     private static final String STATUS_5 = "Tai nạn";
-    private static final String TIME_FORMAT = "dd-MM-YYYY h:mm a";
+    private static final String TIME_FORMAT = "dd/MM/yyyy HH:mm";
     private static final String LOADING_MESSAGE = "Đang tải ảnh lên...";
     private static final String FROM_GALLERY = "Chọn ảnh từ điện thoại";
     private static final String FROM_CAMERA = "Chụp ảnh từ camera";
@@ -119,11 +127,28 @@ public class AddNotificationsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onProviderEnabled(String s) { }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) { }
+
+    @Override
+    public void onProviderDisabled(String s) { }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        getAddress(location.getLatitude(), location.getLongitude());
+    }
+
     private void checkPermissions() {
-        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION};
         if (ContextCompat.checkSelfPermission(getContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getContext(), permissions[1]) == PackageManager.PERMISSION_GRANTED)
+                && ContextCompat.checkSelfPermission(getContext(), permissions[1]) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(getContext(), permissions[2]) == PackageManager.PERMISSION_GRANTED) {
             showAddImageDialog();
+            MainActivity.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        }
         else
             requestPermissions(permissions, PERMISSIONS_REQUEST);
     }
@@ -255,6 +280,24 @@ public class AddNotificationsFragment extends Fragment {
         }
         else
             Toast.makeText(getContext(), PHOTO_REQUEST_MESSAGE, Toast.LENGTH_SHORT).show();
+    }
+
+    public void getAddress(double lat, double lng) {
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address obj = addresses.get(0);
+            String location = obj.getAddressLine(0);
+            location = location + ", " + obj.getLocality();
+            location = location + ", " + obj.getAdminArea();
+            location = location + ", " + obj.getCountryName();
+            location = location + ", " + obj.getFeatureName();
+
+            position.setText(location, TextView.BufferType.EDITABLE);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setFragment(Fragment fragment) {

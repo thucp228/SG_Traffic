@@ -1,19 +1,21 @@
-var functions = require('firebase-functions');
-var admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
 
-exports.pushNotification = functions.database.ref('/notifications/{notificationId}').onWrite(event => {
-    console.log('Push notification event triggered');
+exports.pushNotification = functions.database.ref('/notifications/{pushId}')
+    .onCreate((snapShot, context) => {
+        console.log('Push notification event triggered');
 
-    var topic = "notifications";
-    var snapShot = event.data;
+        const topic = "notifications";
+        const data = snapShot.val();
 
-    var payload = {
-        data: {
-            title: snapShot.child("position").val(),
-            message: snapShot.child("status").val()
-        }
-    };
+        const payload = {
+            notification: {
+                title: data.position,
+                body: data.status,
+                sound: "default" 
+            },
+        };
 
-    return admin.messaging().sendToTopic(topic, payload);
-});
+        return admin.messaging().sendToTopic(topic, payload);
+    });
